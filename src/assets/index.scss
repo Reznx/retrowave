@@ -1,0 +1,97 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home {
+  height: 100vh;
+  background-color: lighten(#090d19, 20%);
+  background-image: url(https://media.giphy.com/media/5nkwQ6TSx9SgAHqtdi/giphy.gif);
+  background-size: cover;
+  background-position: 50% 70%;
+  mix-blend-mode: screen;
+}
+
+.centerer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.porthole {
+  width: 30vw;
+  height: auto;
+  mix-blend-mode: lighten;
+}
+
+.text {
+  font-size: 4vw;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 1vw;
+  color: transparent;
+  width: 100%;
+  text-align: center;
+  mix-blend-mode: screen;
+}
+
+.one {
+  text-shadow: 0 0.1vw 0.05vw #6858f2;
+}
+
+.two {
+  text-shadow: 0 0 0.1vw #ffffff;
+  animation: text-2 0.5s infinite;
+}
+
+@keyframes text-2 {
+  0% {
+    transform: scale(1) translate(0, 0) skew(0deg);
+  }
+  7% {
+    transform: scale(1) translate(0, 0) skew(0deg);
+  }
+  8% {
+    transform: scale(1.2) translate(-20px, 30px) skew(0deg);
+  }
+  11% {
+    transform: scale(1.2) translate(-20px, 30px) skew(0deg);
+  }
+  12% {
+    transform: scale(0) translate(0, 0) skew(0deg);
+  }
+  29% {
+    transform: skew(-50deg);
+  }
+  32% {
+    transform: skew(0deg);
+  }
+  41% {
+    transform: skew(0deg);
+  }
+  67% {
+    transform: scale(1) translate(0, 0) skew(0deg);
+  }
+  68% {
+    transform: scale(1.2) translate(50px, 35px) skew(0deg);
+  }
+  71% {
+    transform: scale(1.2) translate(50px, 35px) skew(0deg);
+  }
+  72% {
+    transform: scale(0) translate(0, 0) skew(0deg);
+  }
+  100% {
+    transform: skew(0deg);
+  }
+}

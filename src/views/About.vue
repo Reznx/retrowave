@@ -1,5 +1,9 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div id="container">
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Blue">BLUE</a>
+    </p>
   </div>
 </template>
+
+
