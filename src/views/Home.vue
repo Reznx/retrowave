@@ -12,6 +12,9 @@
         <p class="text two">Do what you love</p>
       </div>
     </div>
+    <div class="button">
+      <router-link to="/about" class="link">DO MORE</router-link>
+    </div>
   </div>
 </template>
 
