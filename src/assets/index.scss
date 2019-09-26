@@ -149,3 +149,62 @@ body {
     display: none;
   }
 }
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+
+  &.active {
+    transform: scale(1.1);
+
+    .glow {
+      filter: blur(15px) saturate(250%);
+      opacity: 0.75;
+    }
+  }
+}
+
+.image {
+  @extend .background;
+  background-size: cover;
+  background-position: center;
+}
+
+.glow {
+  @extend .image;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.waves {
+  display: block;
+  position: absolute;
+}
+
+.start-btn {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  font-size: 64px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.controls {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 15px;
+}
+.controls .volume {
+  opacity: 0.25;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}

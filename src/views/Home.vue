@@ -18,11 +18,11 @@
             fill="white"
           />
         </svg>
-        <p class="headphones__text">Рекомендуется надеть наушники</p>
+        <p class="headphones__text">Headphones is recommended</p>
       </div>
     </div>
     <div class="button">
-      <router-link to="/about" class="link">DO MORE</router-link>
+      <router-link to="/visual" tag="a" class="link">DO MORE</router-link>
     </div>
   </div>
 </template>
