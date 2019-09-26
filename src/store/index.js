@@ -11,8 +11,32 @@ export default new Vuex.Store({
       "https://i.giphy.com/media/xT9IglBTX4JAsRHH9K/giphy.webp",
       "https://i.giphy.com/media/qOnd3CqaqSoa4/giphy.webp",
       "https://i.giphy.com/media/3oriNLWh9ZXbuppKkE/giphy.webp"
-    ]
+    ],
+    audio: null,
+    background: null
   },
-  mutations: {},
-  actions: {}
+  mutations: {
+    SET_BACKGROUND(state, payload) {
+      state.background = payload;
+    }
+  },
+  actions: {
+    // startAudio({ commit }) {
+    //   const key = process.env.GIPHY_API_KEY;
+    //   const audio = new Audio("http://145.239.26.146:7750/;stream/1");
+    // },
+
+    async fetchBackground({ commit }) {
+      const key = "emul0GaWKdV9iS4pfzUPGRWxuQpqyGdh";
+      const res = await fetch(
+        ` http://api.giphy.com/v1/gifs/search?q=retrowave&api_key=${key}&limit=30 `
+      );
+      const background = await res.json();
+      commit("SET_BACKGROUND", background);
+    }
+  },
+  getters: {
+    audio: s => s.audio,
+    background: s => s.background
+  }
 });

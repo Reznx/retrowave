@@ -22,13 +22,21 @@
       </div>
     </div>
     <div class="button">
-      <router-link to="/visual" tag="a" class="link">DO MORE</router-link>
+      <router-link to="/visual" tag="a" class="link" @click="submitHandler">DO MORE</router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "home"
+  name: "home",
+  data: () => ({
+    background: null
+  }),
+  methods: {
+    async submitHandler() {
+      this.background = await this.$store.dispatch("fetchBackground");
+    }
+  }
 };
 </script>

@@ -2,43 +2,48 @@
   <div>
     <div class="background">
       <div class="image" :style="{backgroundImage: randomBackground}"></div>
-      <div class="glow" :style="{backgroundImage: randomBackground}"></div>
+      <div class="glow"></div>
     </div>
 
     <canvas class="waves"></canvas>
 
     <div class="controls">
       <input class="volume" v-model="volume" type="range" min="0" max="100" step="1" />
-      <span>{{volume}}</span>
+      <button @click="test">TEST</button>
     </div>
   </div>
 </template>
 
 
 <script>
+import { mapState } from "vuex";
 export default {
   data: () => ({
-    gifs: [
-      "https://i.giphy.com/media/l3UcrZHrGW2CjHXqM/giphy.webp",
-      "https://i.giphy.com/media/D4zbzXKSl9tOE/giphy.webp",
-      "https://i.giphy.com/media/xT9IglBTX4JAsRHH9K/giphy.webp",
-      "https://i.giphy.com/media/qOnd3CqaqSoa4/giphy.webp",
-      "https://i.giphy.com/media/3oriNLWh9ZXbuppKkE/giphy.webp"
-    ],
-    audio: undefined,
-    volume: 5,
-    playing: false
+    activeClass: false,
+    volume: 5
   }),
+
   computed: {
+    ...mapState(["gifs", "audio"]),
     randomBackground() {
-      return `url(${this.gifs[Math.floor(Math.random() * this.gifs.length)]})`;
+      return `url(${this.backgound[Math.floor(Math.random() * this.backgound.length)].images.original.url})`;
+    },
+    backgound() {
+      return this.$store.getters.background.data;
     }
   },
-  mounted() {
-    this.audio = new Audio("http://145.239.26.146:7750/;stream/1");
-    this.audio.volume = this.volume / 100;
-    this.audio.play();
+
+  methods: {
+    test() {
+      console.log(this.backgound);
+    }
   },
+
+  async mounted() {
+    this.background = await this.$store.dispatch("fetchBackground");
+    // this.$store.dispatch("startAudio");
+  },
+
   watch: {
     volume() {
       this.audio.volume = this.volume / 100;
