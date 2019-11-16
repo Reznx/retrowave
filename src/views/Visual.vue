@@ -9,7 +9,7 @@
 
     <div class="controls">
       <input class="volume" v-model="volume" type="range" min="0" max="100" step="1" />
-      <button @click="test">TEST</button>
+      <button type="button">TEST</button>
     </div>
   </div>
 </template>
@@ -19,29 +19,26 @@
 import { mapState } from "vuex";
 export default {
   data: () => ({
-    activeClass: false,
-    volume: 5
+    volume: 0.1,
+    audio: null
   }),
 
   computed: {
-    ...mapState(["gifs", "audio"]),
+    ...mapState(["gifs", "songName"]),
     randomBackground() {
-      return `url(${this.backgound[Math.floor(Math.random() * this.backgound.length)].images.original.url})`;
-    },
-    backgound() {
-      return this.$store.getters.background.data;
+      return `url(${this.gifs[Math.floor(Math.random() * this.gifs.length)]})`;
     }
   },
 
-  methods: {
-    test() {
-      console.log(this.backgound);
-    }
+  async created() {
+    await this.$store.dispatch("FETCH_SONG");
+    console.log(this.songName);
   },
 
-  async mounted() {
-    this.background = await this.$store.dispatch("fetchBackground");
-    // this.$store.dispatch("startAudio");
+  mounted() {
+    this.audio = new Audio("http://145.239.26.146:7750/;stream/1");
+    this.audio.play();
+    this.audio.volume = this.volume;
   },
 
   watch: {
