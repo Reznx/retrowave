@@ -12,11 +12,15 @@ export default new Vuex.Store({
       "https://i.giphy.com/media/qOnd3CqaqSoa4/giphy.webp",
       "https://i.giphy.com/media/3oriNLWh9ZXbuppKkE/giphy.webp"
     ],
-    songName: ""
+    songName: "",
+    image: null
   },
   mutations: {
     SET_SONGNAME(state, song) {
       state.songName = song;
+    },
+    CHANGE_BACKGROUND(state, image) {
+      state.image = image;
     }
   },
   actions: {
@@ -29,6 +33,13 @@ export default new Vuex.Store({
       });
       const songName = await res.json();
       commit("SET_SONGNAME", songName);
+    },
+
+    GET_IMAGE({ commit }) {
+      const res = `url(${
+        this.state.gifs[Math.floor(Math.random() * this.state.gifs.length)]
+      })`;
+      commit("CHANGE_BACKGROUND", res);
     }
   },
   getters: {}

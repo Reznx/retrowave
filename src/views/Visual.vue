@@ -1,44 +1,57 @@
 <template>
   <div>
     <div class="background">
-      <div class="image" :style="{backgroundImage: randomBackground}"></div>
+      <div class="image" :style="{ backgroundImage: image }"></div>
       <div class="glow"></div>
     </div>
 
     <canvas class="waves"></canvas>
 
     <div class="controls">
-      <input class="volume" v-model="volume" type="range" min="0" max="100" step="1" />
-      <button type="button">TEST</button>
+      <input
+        class="volume"
+        v-model="volume"
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+      />
     </div>
   </div>
 </template>
-
 
 <script>
 import { mapState } from "vuex";
 export default {
   data: () => ({
     volume: 0.1,
-    audio: null
+    audio: null,
+    interval: null
   }),
 
   computed: {
-    ...mapState(["gifs", "songName"]),
-    randomBackground() {
-      return `url(${this.gifs[Math.floor(Math.random() * this.gifs.length)]})`;
-    }
+    ...mapState(["gifs", "songName", "image"])
   },
 
-  async created() {
-    await this.$store.dispatch("FETCH_SONG");
-    console.log(this.songName);
+  methods: {
+    randomBackground() {
+      this.$store.dispatch("GET_IMAGE");
+      this.interval = setInterval(() => {
+        this.$store.dispatch("GET_IMAGE");
+      }, 3000);
+    }
   },
 
   mounted() {
     this.audio = new Audio("http://145.239.26.146:7750/;stream/1");
     this.audio.play();
     this.audio.volume = this.volume;
+    this.randomBackground();
+  },
+
+  beforeDestroy() {
+    clearInterval(this.interval);
+    this.audio.pause();
   },
 
   watch: {
@@ -48,7 +61,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped lang="scss">
 .background {
